@@ -17,7 +17,7 @@ export default function Panel() {
   return (
     <BoxDiv>
       <BoxInfoPerfil dados={dados} />
-      <BoxDatas />
+      <BoxDatas name={dados?.first_name} />
     </BoxDiv>
   );
 }

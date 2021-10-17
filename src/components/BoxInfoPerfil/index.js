@@ -26,13 +26,7 @@ export default function BoxInfo({ dados }) {
   const data = moment(new Date());
   const dataEntrada = moment(new Date(dados?.created_at));
 
-  console.log(data);
-
-  console.log(dataEntrada);
-
   const durationTime = moment.duration(data.diff(dataEntrada)).asYears();
-
-  console.log(durationTime);
 
   return (
     <BoxInfoPerfil>
