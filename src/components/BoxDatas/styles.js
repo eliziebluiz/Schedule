@@ -57,3 +57,43 @@ export const BoxInfos = styled.div`
     margin-left: 15px;
   }
 `;
+
+export const BoxInputs = styled.div`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 5px;
+  p + p {
+    margin-left: 15px;
+  }
+`;
+
+export const Input = styled.input`
+  padding: 0.5em;
+  margin: 0.5em;
+  color: #9f9f9f;
+  background: #f2f2f2;
+  border: none;
+  border-radius: 6px;
+  height: 32px;
+  width: 100%;
+`;
+
+export const ButtonSubmit = styled.button`
+  width: 100%;
+  margin: 0.5em;
+  height: 45px;
+  border: none;
+  border-radius: 6px;
+  color: ${color.white};
+  background-color: ${color.purple};
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+`;
+
+export const ImgIcon = styled.img`
+  width: 25px;
+  height: 25px;
+`;

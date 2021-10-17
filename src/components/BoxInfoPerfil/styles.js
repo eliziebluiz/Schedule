@@ -52,6 +52,16 @@ export const InfoPessoais = styled.p`
   font-size: 16px;
 `;
 
+export const InfoPessoaisTime = styled.p`
+  color: ${color.white};
+  font-family: "Mulish", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+`;
+
 export const BoxInfos = styled.div`
   display: flex;
   justify-content: center;
@@ -68,4 +78,16 @@ export const ImgPerfil = styled.img`
   width: 120px;
   border: 3px solid ${color.white};
   margin-bottom: 15px;
+`;
+
+export const ImgIcon = styled.img`
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+`;
+
+export const ImgIconVerif = styled.img`
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
 `;
