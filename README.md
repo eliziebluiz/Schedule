@@ -17,7 +17,7 @@ This boilerplate was developed with the following technologies:
 
 ```bash
 # Create a project using this boilerplate
-$ yarn create react-app -e https://github.com/eliziebluiz/Parking.git
+$ yarn create react-app -e https://github.com/eliziebluiz/Schedule.git
 # ✔ What is your project named?
 $ Parking
 # Install dependencies
