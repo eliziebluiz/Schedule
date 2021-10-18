@@ -28,22 +28,28 @@ export default function BoxInfo({ dados }) {
   const [horaAtual, setHoraAtual] = useState(
     moment(new Date()).locale("pt-br").format("LT")
   );
-  const [data, setData] = useState(moment(new Date()));
-  const [dataEntrada, setDataEntrada] = useState(
-    moment(new Date(dados?.created_at))
-  );
+  const [data, setData] = useState(moment());
 
-  const durationTime = moment.duration(data.diff(dataEntrada)).asYears();
+  const [dataEntrada, setDataEntrada] = useState(moment(dados?.created_at));
+
+  // const durationTime =
+
+  // console.log(parseFloat(durationTime).toFixed(2));
+
   useEffect(() => {
     const interval = setInterval(() => {
       setDataAtual(moment(new Date()).locale("pt-br").format("LL"));
       setHoraAtual(moment(new Date()).locale("pt-br").format("LT"));
-      setData(moment(new Date()));
-      setDataEntrada(moment(new Date(dados?.created_at)));
+      setData(moment());
+      setDataEntrada(moment(dados?.created_at));
     }, 1000);
     return () => clearInterval(interval);
     // eslint-disable-next-line
-  }, []);
+  }, [dados]);
+
+  function convertAltura(altura) {
+    return (Number(altura) / 100).toFixed(2);
+  }
 
   return (
     <BoxInfoPerfil>
@@ -57,13 +63,16 @@ export default function BoxInfo({ dados }) {
         </InfoName>
         <InfoFunction>Exorcista Jujutsu</InfoFunction>
         <BoxInfos>
-          <InfoPessoais>Altura: {dados?.height}</InfoPessoais>
+          <InfoPessoais>Altura: {convertAltura(dados?.height)}</InfoPessoais>
           <InfoPessoais>Manequim: {dados?.size}</InfoPessoais>
           <InfoPessoais>Calçado: {dados?.shoe}</InfoPessoais>
         </BoxInfos>
         <InfoPessoaisTime>
           <ImgIcon src={relogio} /> Tempo na Clooser:{" "}
-          {parseFloat(durationTime.toFixed(2))} anos
+          {parseFloat(
+            moment.duration(data.diff(dataEntrada)).asYears()
+          ).toFixed(2)}{" "}
+          anos
         </InfoPessoaisTime>
       </BoxInternalInfoPerfil>
     </BoxInfoPerfil>
