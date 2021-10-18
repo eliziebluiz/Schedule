@@ -20,7 +20,7 @@ export const BoxGeral = styled.div`
 `;
 
 export const BoxInfoPerfil = styled.div`
-  width: 100vh;
+  min-width: 100vh;
   display: flex;
   margin: 0 auto;
   align-items: center;
@@ -31,21 +31,19 @@ export const BoxInfoTitle = styled.div`
 `;
 
 export const BoxInternalInfoDatas = styled.div`
-  text-align: center;
   background-color: ${color.purple};
-  border-radius: 24px;
-  min-height: 200px;
+  border-radius: 8px;
+  min-height: 160px;
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-content: center;
+  align-content: left;
+  padding: 20px;
 `;
 
-export const BoxDatas = styled.div`
+export const BoxDatasInfos = styled.div`
   text-align: center;
   background-color: ${color.purple};
-  border-radius: 24px;
-  min-height: 200px;
+  border-radius: 8px;
+  min-height: 160px;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -75,10 +73,11 @@ export const InfoDatas = styled.p`
   font-family: "Mulish", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 16px;
+  font-size: 14px;
   display: block;
   flex: none;
   height: max-content;
+  display: flex;
   margin: 10px 0px;
 `;
 
@@ -106,6 +105,7 @@ export const BoxInputs = styled.div`
 
 export const ItensLegenda = styled.div`
   display: flex;
+  height: 30px;
 `;
 
 export const Item = styled.p`
@@ -124,7 +124,7 @@ export const Input = styled.input`
 `;
 
 export const ButtonSubmit = styled.button`
-  width: 100%;
+  min-width: 180px;
   margin: 0.5em;
   height: 45px;
   border: none;
@@ -146,4 +146,10 @@ export const ImgIcon = styled.img`
   width: 25px;
   height: 25px;
   margin-right: 50px;
+`;
+
+export const ImgElipses = styled.img`
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
 `;

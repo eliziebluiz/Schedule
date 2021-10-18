@@ -11,10 +11,11 @@ import {
   ImgLogo,
   InfoDatas,
   Input,
-  Item,
   ItensLegenda,
   SubTitlePrimary,
   TitlePrimary,
+  BoxDatasInfos,
+  ImgElipses,
 } from "./styles";
 import { useState } from "react";
 
@@ -22,39 +23,51 @@ import calendar from "../../assets/calendar.svg";
 
 import Logo from "../../assets/Logo.svg";
 
+import ElipseRed from "../../assets/Ellipse4.svg";
+
+import ElipseBlue from "../../assets/Ellipse3.svg";
+
+import ElipseYellow from "../../assets/Ellipse5.svg";
+
 import moment from "moment";
 import Swal from "sweetalert2";
+import Tool from "../ToolTip";
 
-function liberaStatus(dataInput) {
-  const data = moment(new Date());
-  const dataEntrada = moment(new Date(dataInput));
+function insertData(
+  datas,
+  setDatas,
+  dataInput,
+  time,
+  setDataInput,
+  setTime,
+  name
+) {
+  const timeJob = time.split(":");
 
-  console.log(dataEntrada);
-  const durationTime = moment.duration(data.diff(dataEntrada)).asHours();
-  console.log(durationTime);
-}
+  const dataInitialJob = moment(dataInput)
+    .hours(timeJob[0])
+    .minutes(timeJob[1]);
 
-function insertData(datas, setDatas, dataInput, time, setDataInput, setTime) {
-  // console.log(datas);
-  // const filter = datas.filter((item) => item.dataInput === dataInput);
+  const dataFinalJob = moment(dataInitialJob).add(1, "hours");
 
-  const filter = datas.findIndex((d) => d.dataInput === dataInput);
+  const InitialDataIguals = (data, dataStart, dataFinal) => {
+    return (
+      data.isSameOrAfter(dataStart, "minute") &&
+      data.isSameOrBefore(dataFinal, "minute")
+    );
+  };
 
-  const filterHora = datas.findIndex((d) => d.time === time);
-
-  liberaStatus(dataInput);
+  const filter = datas.findIndex((d) =>
+    InitialDataIguals(dataInitialJob, d?.dataInitialJob, d?.dataFinalJob)
+  );
 
   if (filter === -1) {
-    setDatas((state) => [...state, { dataInput, time }]);
-    setDataInput("");
-    setTime("");
-  } else if (filterHora === -1) {
-    setDatas((state) => [...state, { dataInput, time }]);
+    setDatas((state) => [...state, { dataInitialJob, dataFinalJob }]);
     setDataInput("");
     setTime("");
   } else {
     Swal.fire(
-      "Yuji, você não tem o poder de estar em dois lugares ao mesmo tempo."
+      `${name}, você não tem o poder de estar em dois lugares ao mesmo tempo.`
     );
   }
 }
@@ -64,6 +77,22 @@ export default function BoxDatas({ name }) {
   const [dataInput, setDataInput] = useState("");
 
   const [time, setTime] = useState("");
+
+  const yearAtual = moment(new Date()).locale("pt-br").format("YYYY");
+
+  function defineStatus(job) {
+    const data = moment();
+
+    const dataAtual12Hours = moment(data).add(12, "hours");
+
+    if (job.dataInitialJob.isBefore(data, "minutes")) {
+      return { title: "Já inicíou", elipse: ElipseRed };
+    } else if (job.dataInitialJob.isBefore(dataAtual12Hours, "minutes")) {
+      return { title: "Próximo do início", elipse: ElipseYellow };
+    } else {
+      return { title: "Para o futuro", elipse: ElipseBlue };
+    }
+  }
 
   return (
     <>
@@ -77,8 +106,8 @@ export default function BoxDatas({ name }) {
             <Input
               placeholder="Selecione uma data..."
               type="date"
-              min="2021-01-01"
-              max="2021-12-31"
+              min={`${yearAtual}-01-01`}
+              max={`${yearAtual}-12-31`}
               value={dataInput}
               onChange={(e) => setDataInput(e.target.value)}
             />
@@ -95,28 +124,44 @@ export default function BoxDatas({ name }) {
                   dataInput,
                   time,
                   setDataInput,
-                  setTime
+                  setTime,
+                  name
                 )
               }
               disabled={time === "" || dataInput === ""}
             >
-              {console.log(dataInput)}
               <ImgIcon src={calendar} /> Agendar
             </ButtonSubmit>
           </BoxInputs>
+          {/* {JSON.stringify(datas)} */}
           <BoxInternalInfoDatas>
             <ItensLegenda>
-              <Item>.</Item>
-              <Item>.</Item>
-              <Item>.</Item>
+              <ImgElipses src={ElipseBlue} alt="Elipse Blue" />
+              <ImgElipses src={ElipseRed} alt="Elipse Red" />
+              <ImgElipses src={ElipseYellow} alt="Elipse Yellow" />
             </ItensLegenda>
-            <BoxDatas>
-              {datas.map((item, index) => (
-                <InfoDatas key={index}>
-                  {item.dataInput} | {item.time}
-                </InfoDatas>
-              ))}
-            </BoxDatas>
+            <BoxDatasInfos>
+              {datas
+                .sort((a, b) => a.dataInitialJob - b.dataInitialJob)
+                .map((item, index) => (
+                  <InfoDatas key={index}>
+                    <Tool toolTipText={defineStatus(item)?.title}>
+                      <span style={{ marginRight: "10px" }}>
+                        <img src={defineStatus(item)?.elipse} alt="Elipse" />
+                      </span>
+                    </Tool>
+                    {`${item.dataInitialJob.format("DD/MMM")} das ${
+                      item.dataInitialJob.format("mm") === "00"
+                        ? item.dataInitialJob.format("HH[h]")
+                        : item.dataInitialJob.format("HH[h]mm")
+                    }`}{" "}
+                    {"às "}
+                    {item.dataFinalJob.format("mm") === "00"
+                      ? item.dataFinalJob.format("HH[h]")
+                      : item.dataFinalJob.format("HH[h]mm")}
+                  </InfoDatas>
+                ))}
+            </BoxDatasInfos>
           </BoxInternalInfoDatas>
         </BoxInfoTitle>
       </BoxInfoPerfil>
