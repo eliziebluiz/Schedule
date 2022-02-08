@@ -6,7 +6,7 @@ import ReactGA from "react-ga";
 
 function App() {
   useEffect(() => {
-    ReactGA.initialize("G-54J42DPK9M");
+    ReactGA.initialize("302789544");
     ReactGA.pageview("/");
     // G-54J42DPK9M
   }, []);
