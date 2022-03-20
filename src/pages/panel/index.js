@@ -12,8 +12,6 @@ export default function Panel() {
     reqBuscaDados(setDados);
   }, []);
 
-  console.log("12344")
-
   return (
     <BoxDiv>
       <BoxInfoPerfil dados={dados} />
