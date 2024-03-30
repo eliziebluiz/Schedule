@@ -18,7 +18,7 @@ This boilerplate was developed with the following technologies:
 # Create a project using this boilerplate
 $ yarn create react-app -e https://github.com/eliziebluiz/Schedule.git
 # ✔ What is your project named?
-$ Parking
+$ Schedule
 # Install dependencies
 $ yarn install
 # Run the app
