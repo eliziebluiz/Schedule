@@ -5,7 +5,7 @@ import { color } from "utils/pallete";
 export const BoxInfoPerfil = styled.div`
   margin-top: 0px;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   max-width: 500px;
   background-color: ${color.purple};
   border-radius: 0px 24px 0px 0px;
@@ -38,7 +38,7 @@ export const BoxInternalInfoPerfil = styled.div`
     margin: 0;
     display: flex;
     position: absolute;
-    bottom: -50px;
+    bottom: -25px;
   }
 `;
 
