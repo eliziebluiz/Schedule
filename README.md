@@ -1,6 +1,5 @@
 <h1 align="center">
-    <img alt="Parking" src="https://cdn.statically.io/img/closeer.work/wp-content/uploads/2021/03/ilustracao-closeer-work_2.png?quality=100&f=auto" width="50%"
-/>
+    <img alt="Schedule" src="https://github.com/eliziebluiz/Schedule/blob/main/public/logo-closeer.png" width="20%"/>
     <br>
     Schedule
 </h1>
