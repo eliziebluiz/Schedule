@@ -61,17 +61,17 @@ export default function BoxInfo({ dados }) {
         <InfoName>
           {dados?.first_name} {dados?.last_name} <ImgIconVerif src={verific} />
         </InfoName>
-        <InfoFunction>Exorcista Jujutsu</InfoFunction>
+        <InfoFunction>{dados?.role}</InfoFunction>
         <BoxInfos>
           <InfoPessoais>Altura: {convertAltura(dados?.height)}</InfoPessoais>
           <InfoPessoais>Manequim: {dados?.size}</InfoPessoais>
           <InfoPessoais>Calçado: {dados?.shoe}</InfoPessoais>
         </BoxInfos>
         <InfoPessoaisTime>
-          <ImgIcon src={relogio} /> Tempo na Clooser:{" "}
+          <ImgIcon src={relogio} /> Tempo na Closeer:{" "}
           {parseFloat(
             moment.duration(data.diff(dataEntrada)).asYears()
-          ).toFixed(2)}{" "}
+          ).toFixed(0)}{" "}
           anos
         </InfoPessoaisTime>
       </BoxInternalInfoPerfil>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { color } from "../../utils/palete";
+import { color } from "utils/pallete";
 
 export const BoxHeader = styled.header`
   width: 100px;
@@ -142,10 +142,17 @@ export const ButtonSubmit = styled.button`
   }
 `;
 
+export const BodyBotton = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
 export const ImgIcon = styled.img`
   width: 25px;
   height: 25px;
-  margin-right: 50px;
+  padding-right: 16px;
+  border-right: 1px solid #fff;
 `;
 
 export const ImgElipses = styled.img`

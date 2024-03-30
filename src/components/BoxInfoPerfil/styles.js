@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { color } from "../../utils/palete";
+import { color } from "utils/pallete";
 
 export const BoxInfoPerfil = styled.div`
   display: inline-table;
@@ -81,13 +81,11 @@ export const ImgPerfil = styled.img`
 `;
 
 export const ImgIcon = styled.img`
-  width: 25px;
-  height: 25px;
+  width: 18px;
   margin-right: 5px;
 `;
 
 export const ImgIconVerif = styled.img`
   width: 15px;
   height: 15px;
-  margin-right: 5px;
 `;

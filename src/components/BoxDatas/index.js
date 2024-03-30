@@ -1,37 +1,16 @@
-import {
-  // BoxGeral,
-  BoxHeader,
-  BoxInfoPerfil,
-  // BoxInfos,
-  BoxInfoTitle,
-  BoxInputs,
-  BoxInternalInfoDatas,
-  ButtonSubmit,
-  ImgIcon,
-  ImgLogo,
-  InfoDatas,
-  Input,
-  ItensLegenda,
-  SubTitlePrimary,
-  TitlePrimary,
-  BoxDatasInfos,
-  ImgElipses,
-} from "./styles";
 import { useState } from "react";
-
-import calendar from "../../assets/calendar.svg";
-
-import Logo from "../../assets/Logo.svg";
-
-import ElipseRed from "../../assets/Ellipse4.svg";
-
-import ElipseBlue from "../../assets/Ellipse3.svg";
-
-import ElipseYellow from "../../assets/Ellipse5.svg";
-
 import moment from "moment";
 import Swal from "sweetalert2";
-import Tool from "../ToolTip";
+
+import Tool from "components/ToolTip";
+
+import * as S from "./styles";
+
+import calendar from "assets/calendar.svg";
+import Logo from "assets/Logo.svg";
+import ElipseRed from "assets/Ellipse4.svg";
+import ElipseBlue from "assets/Ellipse3.svg";
+import ElipseYellow from "assets/Ellipse5.svg";
 
 function insertData(
   datas,
@@ -96,14 +75,14 @@ export default function BoxDatas({ name }) {
 
   return (
     <>
-      <BoxInfoPerfil>
-        <BoxInfoTitle>
-          <TitlePrimary>Bem-vindo(a), {name}</TitlePrimary>
-          <SubTitlePrimary>
+      <S.BoxInfoPerfil>
+        <S.BoxInfoTitle>
+          <S.TitlePrimary>Bem-vindo(a), {name}</S.TitlePrimary>
+          <S.SubTitlePrimary>
             Adicione seus jobs a agenda e gerencie sua rotina
-          </SubTitlePrimary>
-          <BoxInputs>
-            <Input
+          </S.SubTitlePrimary>
+          <S.BoxInputs>
+            <S.Input
               placeholder="Selecione uma data..."
               type="date"
               min={`${yearAtual}-01-01`}
@@ -111,12 +90,12 @@ export default function BoxDatas({ name }) {
               value={dataInput}
               onChange={(e) => setDataInput(e.target.value)}
             />
-            <Input
+            <S.Input
               type="time"
               value={time}
               onChange={(e) => setTime(e.target.value)}
             />
-            <ButtonSubmit
+            <S.ButtonSubmit
               onClick={() =>
                 insertData(
                   datas,
@@ -130,21 +109,29 @@ export default function BoxDatas({ name }) {
               }
               disabled={time === "" || dataInput === ""}
             >
-              <ImgIcon src={calendar} /> Agendar
-            </ButtonSubmit>
-          </BoxInputs>
-          {/* {JSON.stringify(datas)} */}
-          <BoxInternalInfoDatas>
-            <ItensLegenda>
-              <ImgElipses src={ElipseBlue} alt="Elipse Blue" />
-              <ImgElipses src={ElipseRed} alt="Elipse Red" />
-              <ImgElipses src={ElipseYellow} alt="Elipse Yellow" />
-            </ItensLegenda>
-            <BoxDatasInfos>
+              <S.ImgIcon src={calendar} />{" "}
+              <S.BodyBotton>
+                <p>Agendar</p>
+              </S.BodyBotton>
+            </S.ButtonSubmit>
+          </S.BoxInputs>
+          <S.BoxInternalInfoDatas>
+            <S.ItensLegenda>
+              <Tool toolTipText={"Para o futuro"}>
+                <S.ImgElipses src={ElipseBlue} alt="Elipse Blue" />
+              </Tool>
+              <Tool toolTipText={"Já iniciou"}>
+                <S.ImgElipses src={ElipseRed} alt="Elipse Red" />
+              </Tool>
+              <Tool toolTipText={"Próximo do início"}>
+                <S.ImgElipses src={ElipseYellow} alt="Elipse Yellow" />
+              </Tool>
+            </S.ItensLegenda>
+            <S.BoxDatasInfos>
               {datas
                 .sort((a, b) => a.dataInitialJob - b.dataInitialJob)
                 .map((item, index) => (
-                  <InfoDatas key={index}>
+                  <S.InfoDatas key={index}>
                     <Tool toolTipText={defineStatus(item)?.title}>
                       <span style={{ marginRight: "10px" }}>
                         <img src={defineStatus(item)?.elipse} alt="Elipse" />
@@ -159,15 +146,15 @@ export default function BoxDatas({ name }) {
                     {item.dataFinalJob.format("mm") === "00"
                       ? item.dataFinalJob.format("HH[h]")
                       : item.dataFinalJob.format("HH[h]mm")}
-                  </InfoDatas>
+                  </S.InfoDatas>
                 ))}
-            </BoxDatasInfos>
-          </BoxInternalInfoDatas>
-        </BoxInfoTitle>
-      </BoxInfoPerfil>
-      <BoxHeader>
-        <ImgLogo src={Logo} />
-      </BoxHeader>
+            </S.BoxDatasInfos>
+          </S.BoxInternalInfoDatas>
+        </S.BoxInfoTitle>
+      </S.BoxInfoPerfil>
+      <S.BoxHeader>
+        <S.ImgLogo src={Logo} />
+      </S.BoxHeader>
     </>
   );
 }

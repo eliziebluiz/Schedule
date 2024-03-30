@@ -1,16 +1,7 @@
-// import logo from './logo.svg';
-import { useEffect } from "react";
 import "./global.css";
-import Panel from "./pages/panel";
-import ReactGA from "react-ga";
+import Panel from "pages/panel";
 
 function App() {
-  useEffect(() => {
-    ReactGA.initialize("302789544");
-    ReactGA.pageview("/");
-    // G-54J42DPK9M
-  }, []);
-
   return <Panel />;
 }
 
