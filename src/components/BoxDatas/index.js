@@ -13,6 +13,7 @@ import ElipseBlue from "assets/Ellipse3.svg";
 import ElipseYellow from "assets/Ellipse5.svg";
 
 function insertData(
+  e,
   datas,
   setDatas,
   dataInput,
@@ -21,6 +22,7 @@ function insertData(
   setTime,
   name
 ) {
+  e.preventDefault();
   const timeJob = time.split(":");
 
   const dataInitialJob = moment(dataInput)
@@ -74,87 +76,87 @@ export default function BoxDatas({ name }) {
   }
 
   return (
-    <>
-      <S.BoxInfoPerfil>
-        <S.BoxInfoTitle>
-          <S.TitlePrimary>Bem-vindo(a), {name}</S.TitlePrimary>
-          <S.SubTitlePrimary>
-            Adicione seus jobs a agenda e gerencie sua rotina
-          </S.SubTitlePrimary>
-          <S.BoxInputs>
-            <S.Input
-              placeholder="Selecione uma data..."
-              type="date"
-              min={`${yearAtual}-01-01`}
-              max={`${yearAtual}-12-31`}
-              value={dataInput}
-              onChange={(e) => setDataInput(e.target.value)}
-            />
-            <S.Input
-              type="time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-            />
-            <S.ButtonSubmit
-              onClick={() =>
-                insertData(
-                  datas,
-                  setDatas,
-                  dataInput,
-                  time,
-                  setDataInput,
-                  setTime,
-                  name
-                )
-              }
-              disabled={time === "" || dataInput === ""}
-            >
-              <S.ImgIcon src={calendar} />{" "}
-              <S.BodyBotton>
-                <p>Agendar</p>
-              </S.BodyBotton>
-            </S.ButtonSubmit>
-          </S.BoxInputs>
-          <S.BoxInternalInfoDatas>
-            <S.ItensLegenda>
-              <Tool toolTipText={"Para o futuro"}>
-                <S.ImgElipses src={ElipseBlue} alt="Elipse Blue" />
-              </Tool>
-              <Tool toolTipText={"Já iniciou"}>
-                <S.ImgElipses src={ElipseRed} alt="Elipse Red" />
-              </Tool>
-              <Tool toolTipText={"Próximo do início"}>
-                <S.ImgElipses src={ElipseYellow} alt="Elipse Yellow" />
-              </Tool>
-            </S.ItensLegenda>
-            <S.BoxDatasInfos>
-              {datas
-                .sort((a, b) => a.dataInitialJob - b.dataInitialJob)
-                .map((item, index) => (
-                  <S.InfoDatas key={index}>
-                    <Tool toolTipText={defineStatus(item)?.title}>
-                      <span style={{ marginRight: "10px" }}>
-                        <img src={defineStatus(item)?.elipse} alt="Elipse" />
-                      </span>
-                    </Tool>
-                    {`${item.dataInitialJob.format("DD/MMM")} das ${
-                      item.dataInitialJob.format("mm") === "00"
-                        ? item.dataInitialJob.format("HH[h]")
-                        : item.dataInitialJob.format("HH[h]mm")
-                    }`}{" "}
-                    {"às "}
-                    {item.dataFinalJob.format("mm") === "00"
-                      ? item.dataFinalJob.format("HH[h]")
-                      : item.dataFinalJob.format("HH[h]mm")}
-                  </S.InfoDatas>
-                ))}
-            </S.BoxDatasInfos>
-          </S.BoxInternalInfoDatas>
-        </S.BoxInfoTitle>
-      </S.BoxInfoPerfil>
+    <S.Wrapper>
       <S.BoxHeader>
         <S.ImgLogo src={Logo} />
       </S.BoxHeader>
-    </>
+      <S.Body>
+        <S.TitlePrimary>Bem-vindo(a), {name}</S.TitlePrimary>
+        <S.SubTitlePrimary>
+          Adicione seus jobs a agenda e gerencie sua rotina
+        </S.SubTitlePrimary>
+        <S.BoxInputs>
+          <S.Input
+            placeholder="Selecione uma data..."
+            type="date"
+            min={`${yearAtual}-01-01`}
+            max={`${yearAtual}-12-31`}
+            value={dataInput}
+            onChange={(e) => setDataInput(e.target.value)}
+          />
+          <S.Input
+            type="time"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+          />
+          <S.ButtonSubmit
+            onClick={(e) =>
+              insertData(
+                e,
+                datas,
+                setDatas,
+                dataInput,
+                time,
+                setDataInput,
+                setTime,
+                name
+              )
+            }
+            disabled={time === "" || dataInput === ""}
+            type="submit"
+          >
+            <S.ImgIcon src={calendar} /> <S.Separator />
+            <S.BodyBotton>
+              <p>Agendar</p>
+            </S.BodyBotton>
+          </S.ButtonSubmit>
+        </S.BoxInputs>
+        <S.BoxInternalInfoDatas>
+          <S.ItensLegenda>
+            <Tool toolTipText={"Para o futuro"}>
+              <S.ImgElipses src={ElipseBlue} alt="Elipse Blue" />
+            </Tool>
+            <Tool toolTipText={"Já iniciou"}>
+              <S.ImgElipses src={ElipseRed} alt="Elipse Red" />
+            </Tool>
+            <Tool toolTipText={"Próximo do início"}>
+              <S.ImgElipses src={ElipseYellow} alt="Elipse Yellow" />
+            </Tool>
+          </S.ItensLegenda>
+          <S.BoxDatasInfos>
+            {datas
+              .sort((a, b) => a.dataInitialJob - b.dataInitialJob)
+              .map((item, index) => (
+                <S.InfoDatas key={index}>
+                  <Tool toolTipText={defineStatus(item)?.title}>
+                    <span style={{ marginRight: "10px" }}>
+                      <img src={defineStatus(item)?.elipse} alt="Elipse" />
+                    </span>
+                  </Tool>
+                  {`${item.dataInitialJob.format("DD/MMM")} das ${
+                    item.dataInitialJob.format("mm") === "00"
+                      ? item.dataInitialJob.format("HH[h]")
+                      : item.dataInitialJob.format("HH[h]mm")
+                  }`}{" "}
+                  {"às "}
+                  {item.dataFinalJob.format("mm") === "00"
+                    ? item.dataFinalJob.format("HH[h]")
+                    : item.dataFinalJob.format("HH[h]mm")}
+                </S.InfoDatas>
+              ))}
+          </S.BoxDatasInfos>
+        </S.BoxInternalInfoDatas>
+      </S.Body>
+    </S.Wrapper>
   );
 }

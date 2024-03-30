@@ -12,6 +12,8 @@ import {
   InfoPessoaisTime,
   ImgIcon,
   ImgIconVerif,
+  Wrapper,
+  BoxProfile,
 } from "./styles";
 
 import relogio from "../../assets/relogio.svg";
@@ -54,25 +56,35 @@ export default function BoxInfo({ dados }) {
   return (
     <BoxInfoPerfil>
       <HoraHeader>
-        Hoje - {dataAtual} - {horaAtual}
+        <p>
+          Hoje - {dataAtual} - {horaAtual}
+        </p>
       </HoraHeader>
       <BoxInternalInfoPerfil>
-        <ImgPerfil src={dados?.picture} />
-        <InfoName>
-          {dados?.first_name} {dados?.last_name} <ImgIconVerif src={verific} />
-        </InfoName>
-        <InfoFunction>{dados?.role}</InfoFunction>
+        <Wrapper>
+          <ImgPerfil src={dados?.picture} />
+          <BoxProfile>
+            <InfoName>
+              {dados?.first_name} {dados?.last_name}{" "}
+              <ImgIconVerif src={verific} />
+            </InfoName>
+            <InfoFunction>{dados?.role}</InfoFunction>
+          </BoxProfile>
+        </Wrapper>
         <BoxInfos>
           <InfoPessoais>Altura: {convertAltura(dados?.height)}</InfoPessoais>
           <InfoPessoais>Manequim: {dados?.size}</InfoPessoais>
           <InfoPessoais>Calçado: {dados?.shoe}</InfoPessoais>
         </BoxInfos>
         <InfoPessoaisTime>
-          <ImgIcon src={relogio} /> Tempo na Closeer:{" "}
-          {parseFloat(
-            moment.duration(data.diff(dataEntrada)).asYears()
-          ).toFixed(0)}{" "}
-          anos
+          <ImgIcon src={relogio} />
+          <p>
+            Tempo na Closeer:{" "}
+            {parseFloat(
+              moment.duration(data.diff(dataEntrada)).asYears()
+            ).toFixed()}{" "}
+            anos
+          </p>
         </InfoPessoaisTime>
       </BoxInternalInfoPerfil>
     </BoxInfoPerfil>

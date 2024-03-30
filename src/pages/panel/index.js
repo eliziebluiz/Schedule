@@ -14,9 +14,9 @@ export default function Panel() {
   }, []);
 
   return (
-    <S.BoxDiv>
+    <S.Box>
       <BoxInfoPerfil dados={dados} />
       <BoxDatas name={dados?.first_name} />
-    </S.BoxDiv>
+    </S.Box>
   );
 }

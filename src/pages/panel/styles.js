@@ -1,14 +1,10 @@
 import styled from "styled-components";
 
-export const BoxDiv = styled.div`
+export const Box = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
-  max-width: 1800px;
-
-  @media(min-width: 1800px){
-    margin: 0 auto;
-  }
+  gap: 1.5rem;
 
   @media(max-width: 1300px){
     flex-direction: column;
