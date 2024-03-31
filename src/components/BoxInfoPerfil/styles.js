@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { color } from "utils/pallete";
 
 export const BoxInfoPerfil = styled.div`
-  margin-top: 0px;
+  margin: 0px;
   width: 100%;
   height: 100%;
   max-width: 500px;
@@ -24,11 +24,10 @@ export const BoxInfoPerfil = styled.div`
 `;
 
 export const BoxInternalInfoPerfil = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  height: 100%;
 
   text-align: center;
 
@@ -43,6 +42,9 @@ export const BoxInternalInfoPerfil = styled.div`
 `;
 
 export const HoraHeader = styled.div`
+  display: flex;
+  position: absolute;
+
   > p {
     color: ${color.white};
     font-family: "Mulish", sans-serif;
@@ -54,8 +56,7 @@ export const HoraHeader = styled.div`
   }
 
   @media (max-width: 1300px) {
-    display: flex;
-    justify-content: flex-end;
+    right: 10px;
   }
 `;
 
